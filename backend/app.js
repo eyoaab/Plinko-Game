@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(cors()); 
 // Routes
 
-app.use('/users', userRoute);
+app.use('/user', userRoute);
 
 // Global error handler
 app.use((err, req, res, next) => {

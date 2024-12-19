@@ -1,6 +1,6 @@
 const app = require('./app');
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 
 if (!process.env.PORT) {
   console.warn("Warning: PORT is not defined in environment variables. Using default port 5000.");
