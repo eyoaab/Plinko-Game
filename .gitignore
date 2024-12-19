@@ -1,0 +1,116 @@
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+./back-end/node_modules/
+bower_components/
+jspm_packages/
+
+# Build output
+build/
+dist/
+lib-cov/
+coverage/
+.nyc_output/
+.cache/
+.next/
+.nuxt/
+.vuepress/dist
+public/
+.out/
+
+# Compiled binary addons
+build/Release/
+
+# TypeScript
+*.tsbuildinfo
+
+# Package manager caches
+.npm/
+.yarn/
+.yarn-integrity
+
+# Linting caches
+.eslintcache
+.stylelintcache
+
+# Bundler caches
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Environment variables
+.env
+.env.*
+.env.local
+.env.test.local
+.env.production.local
+
+# IDE and Editor files
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.idea/
+*.iml
+*.swp
+*.swo
+*.bak
+
+# MacOS and Windows system files
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+
+
+# Test output
+jest-cache/
+junit-report.xml
+
+# Storybook
+.out/
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# Generated source maps
+*.map
+
+# Serverless frameworks
+.serverless/
+
+# DynamoDB Local files
+.dynamodb/
+
+# Sentry
+.sentrycli
+
+# Thumbnails
+Thumbs.db
+ehthumbs.db
+
+# Hexo build output
+public/
+
+# Miscellaneous
+*.bak
+*.old
+*.orig
+*.rej
+*.patch
