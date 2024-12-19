@@ -2,37 +2,47 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-const connectDB = require("./Configurations/db.config");
+const connectDB = require("./configurations/db.config");
 
-// Routes
-const userRoute = require('./Routes/user.routes');
+// Import route handlers
+const userRoute = require('./routes/user.routes');
+const gameRoute = require('./routes/game.routes');
 
-// Initialize app and load environment variables
+// Load environment variables from .env file
 dotenv.config();
+
+// Initialize the Express application
 const app = express();
 
+// Validate required environment variables
 if (!process.env.PORT || !process.env.MONGO_URI) {
   console.error("Error: Missing required environment variables.");
-  process.exit(1);
+  process.exit(1); // Exit the application if variables are missing
 }
 
+// Connect to the MongoDB database
 connectDB();
 
 // Middlewares
-app.use(express.json()); 
-//for cores
-app.use(cors()); 
-// Routes
+// Parse incoming JSON requests
+app.use(express.json());
 
-app.use('/user', userRoute);
+// Enable Cross-Origin Resource Sharing (CORS)
+app.use(cors());
 
-// Global error handler
+// Set up API routes
+app.use('/user', userRoute); // Routes for user-related endpoints
+app.use('/game', gameRoute); // Routes for game-related endpoints
+
+// Global error handler for uncaught errors
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error(err.stack); // Log the error stack trace
+
   res.status(err.status || 500).json({
-    message: err.message || "Internal Server Error",
-    stack: process.env.NODE_ENV === "production" ? null : err.stack,
+    message: err.message || "Internal Server Error", // Return error message
+    stack: process.env.NODE_ENV === "production" ? null : err.stack, // Hide stack trace in production
   });
 });
 
+// Export the configured app
 module.exports = app;

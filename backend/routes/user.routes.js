@@ -1,5 +1,6 @@
-const router = require('express').Router();
-const userController = require('../controllers/user.controller');
+const express = require('express');
+const router = express.Router();
+const userController = require('../controllers/user-controller');
 
 // to create a user
 router.post('/', userController.createUser);
