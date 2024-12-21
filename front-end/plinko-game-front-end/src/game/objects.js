@@ -1,6 +1,7 @@
 import { HEIGHT, NUM_SINKS, WIDTH, obstacleRadius, sinkWidth } from "./constants";
 import { pad } from "./paddings";
 
+// MULTIPLIERS defines the score multipliers for each sink
 const MULTIPLIERS = {
     1: 16,
     2: 9,
@@ -21,6 +22,7 @@ const MULTIPLIERS = {
     17: 16
 };
 
+// createObstacles generates an array of obstacle objects arranged in rows and columns
 export const createObstacles = () => {
     const obstacles = [];
     const rows = 18;
@@ -36,6 +38,7 @@ export const createObstacles = () => {
     return obstacles;
 };
 
+// createSinks generates an array of sink objects with assigned positions and multipliers
 export const createSinks = () => {
     const sinks = [];
     const SPACING = obstacleRadius * 2;

@@ -1,6 +1,10 @@
 import { gravity, horizontalFriction, verticalFriction } from "../constants";
 import { pad, unpad } from "../paddings";
 
+const playMusic = () => {
+  const audio = new Audio("/sink-sound.mp3");
+  audio.play();
+};
 export class Ball {
   constructor(x, y, radius, color, ctx, obstacles, sinks, onFinish) {
     this.x = x;
@@ -29,7 +33,7 @@ export class Ball {
     this.y += this.vy;
 
     // Collision with obstacles
-    this.obstacles.forEach(obstacle => {
+    this.obstacles.forEach((obstacle) => {
       const dist = Math.hypot(this.x - obstacle.x, this.y - obstacle.y);
       if (dist < pad(this.radius + obstacle.radius)) {
         // Calculate collision angle
@@ -52,8 +56,9 @@ export class Ball {
       if (
         unpad(this.x) > sink.x - sink.width / 2 &&
         unpad(this.x) < sink.x + sink.width / 2 &&
-        (unpad(this.y) + this.radius) > (sink.y - sink.height / 2)
+        unpad(this.y) + this.radius > sink.y - sink.height / 2
       ) {
+        playMusic();
         this.vx = 0;
         this.vy = 0;
         this.onFinish(i);
