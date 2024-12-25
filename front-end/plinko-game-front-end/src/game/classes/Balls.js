@@ -58,7 +58,7 @@ export class Ball {
         unpad(this.x) < sink.x + sink.width / 2 &&
         unpad(this.y) + this.radius > sink.y - sink.height / 2
       ) {
-        playMusic();
+        playMusic(); // to sound the voice of the sink
         this.vx = 0;
         this.vy = 0;
         this.onFinish(i);
