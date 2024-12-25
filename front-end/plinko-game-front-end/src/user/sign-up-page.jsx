@@ -1,13 +1,23 @@
 // import { Link } from "react-router-dom";
 
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { signup } from "../auth/authSlice";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const dispatch = useDispatch();
+  const { loading, user, error } = useSelector((state) => state.auth);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signup({ name, email, password }));
+  };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-classBg">
@@ -83,15 +93,20 @@ const SignUpPage = () => {
           </div>
 
           <button
+            onClick={handleSubmit}
             type="submit"
             className="w-msx px-10 py-2 text-black bg-darkYellow rounded-md focus:outline-none focus:ring-2 "
           >
             Sign-up
           </button>
         </form>
-        {error && (
-          <p className="mt-4 text-sm text-center text-red-500">{error}</p>
+        {errorMessage && (
+          <p className="mt-4 text-sm text-center text-red-500">
+            {errorMessage}
+          </p>
         )}
+        {loading && <p>loading...</p>}
+        {user && <p>user loged in ..</p>}
         <p className="mt-6 text-sm text-center text-gray-300">
           Already have an account?{" "}
           {/* <Link to="/login" className="text-blue-500 hover:underline">

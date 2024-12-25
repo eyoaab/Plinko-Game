@@ -1,14 +1,11 @@
-// import "./App.css";
-// import { Game } from "./game/game-page";
+import { Provider } from "react-redux";
+import store from "./store";
 import LoginPage from "./user/login-page";
 import SignUpPage from "./user/sign-up-page";
 
-function App() {
-  return (
-    <>
-      <SignUpPage />
-    </>
-  );
-}
-
+const App = () => (
+  <Provider store={store}>
+    <SignUpPage />
+  </Provider>
+);
 export default App;
