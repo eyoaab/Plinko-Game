@@ -1,52 +1,51 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const signup = createAsyncThunk(
-  "auth/signup",
-  async ({ name, email, password }, { rejectWithValue }) => {
+// Async action for signup
+export const signupUser = createAsyncThunk(
+  "user/signupUser",
+  async (userData, { rejectWithValue }) => {
     try {
+      // Send POST request with JSON payload
       const response = await axios.post(
         "https://plinko-game-2.onrender.com/user/",
+        userData,
         {
-          name,
-          email,
-          password,
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
       );
       return response.data;
     } catch (error) {
-      console.log("error occured");
-      console.log(error);
-      return rejectWithValue(
-        error.response ? error.response.data.message : error.message
-      );
+      return rejectWithValue(error.response.data);
     }
   }
 );
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState: {
+    userInfo: null,
     loading: false,
-    user: null,
     error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(signup.pending, (state) => {
+      .addCase(signupUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(signup.fulfilled, (state, action) => {
+      .addCase(signupUser.fulfilled, (state, action) => {
         state.loading = false;
-        state.user = action.payload;
+        state.userInfo = action.payload;
       })
-      .addCase(signup.rejected, (state, action) => {
+      .addCase(signupUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export default authSlice.reducer;
+export default userSlice.reducer;

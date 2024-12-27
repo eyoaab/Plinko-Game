@@ -6,7 +6,7 @@ import { signup } from "../auth/authSlice";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,7 +16,7 @@ const SignUpPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup({ name, email, password }));
+    dispatch(signup({ name, userName, password }));
   };
 
   return (
@@ -43,17 +43,17 @@ const SignUpPage = () => {
 
           <div>
             <label
-              htmlFor="email"
+              htmlFor="userName"
               className="block text-sm font-medium text-white text-left"
             >
-              Email
+              userName
             </label>
             <input
-              type="email"
-              id="email"
+              type="userName"
+              id="userName"
               className="w-full px-4 py-2 mt-2 text-gray-900 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="Enter your email"
-              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your userName"
+              onChange={(e) => setuserName(e.target.value)}
               required
             />
           </div>
