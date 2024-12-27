@@ -5,14 +5,14 @@ const jwt = require("jsonwebtoken");
 // Create a new user
 exports.createUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, userName, password } = req.body;
 
     // Check if the user already exists
-    const existingUser = await User.findOne({ $or: [{ email }] });
+    const existingUser = await User.findOne({ $or: [{ userName }] });
     if (existingUser) {
       return res
         .status(400)
-        .json({ message: "User with this email already exists." });
+        .json({ message: "User with this userName already exists." });
     }
 
     // Hash the password
@@ -31,35 +31,32 @@ exports.createUser = async (req, res) => {
     res.status(201).json({
       user: {
         name: user.name,
-        email: user.email,
+        userName: userName,
       },
       message: "User created successfully!",
     });
   } catch (error) {
     console.error("Error creating user:", error.message);
-    res
-      .status(500)
-      .json({
-        message:
-          "An error occurred while creating the user. Please try again later.",
-      });
+    res.status(500).json({
+      message: error.message,
+    });
   }
 };
 
 // Login a user
 exports.loginUser = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { userName, password } = req.body;
 
     // Validate required fields
-    if (!email || !password) {
+    if (!userName || !password) {
       return res
         .status(400)
-        .json({ message: "email and password are required." });
+        .json({ message: "userName and password are required." });
     }
 
-    // Find the user by email
-    const user = await User.findOne({ email });
+    // Find the user by userName
+    const user = await User.findOne({ userName });
     if (!user) {
       return res.status(404).json({ message: "User not found." });
     }
@@ -82,7 +79,7 @@ exports.loginUser = async (req, res) => {
       token,
       user: {
         name: user.name,
-        email: user.email,
+        userName: user.userName,
         score: user.score,
       },
     });
