@@ -1,23 +1,31 @@
-// import { Link } from "react-router-dom";
-
-import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signup } from "../auth/authSlice";
+import { signupUser } from "../auth/authSlice";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");
   const [userName, setuserName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { loading, user, error } = useSelector((state) => state.auth);
+  const { loading, error, userInfo } = useSelector((state) => state.auth);
 
   const handleSubmit = (e) => {
+    if (password !== confirmPassword) {
+      return;
+    }
     e.preventDefault();
-    dispatch(signup({ name, userName, password }));
+    dispatch(signupUser({ name, userName, password }));
   };
+  // Navigate to home page after successful signup
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/game"); // Redirect to home page
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-classBg">
@@ -97,21 +105,19 @@ const SignUpPage = () => {
             type="submit"
             className="w-msx px-10 py-2 text-black bg-darkYellow rounded-md focus:outline-none focus:ring-2 "
           >
-            Sign-up
+            {loading ? "Loading..." : "Sign-up"}
           </button>
         </form>
-        {errorMessage && (
+        {error && (
           <p className="mt-4 text-sm text-center text-red-500">
-            {errorMessage}
+            {error.message}
           </p>
         )}
-        {loading && <p>loading...</p>}
-        {user && <p>user loged in ..</p>}
         <p className="mt-6 text-sm text-center text-gray-300">
           Already have an account?{" "}
-          {/* <Link to="/login" className="text-blue-500 hover:underline">
+          <Link to="/" className="text-blue-500 hover:underline">
             Login
-          </Link> */}
+          </Link>
         </p>
       </div>
     </div>
