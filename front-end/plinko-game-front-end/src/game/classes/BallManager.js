@@ -77,26 +77,57 @@ export class BallManager {
   }
 
   drawSinks() {
-    // Draw the sinks on the canvas, including their multipliers and colors
-    this.context.fillStyle = "green";
+    // Draw the sinks on the canvas with rounded corners
     const SPACING = obstacleRadius * 2;
+
     for (let i = 0; i < this.sinks.length; i++) {
-      this.context.fillStyle = this.getColor(i).background;
       const sink = this.sinks[i];
-      this.context.font = "normal 13px Arial";
-      this.context.fillRect(
-        sink.x,
-        sink.y - sink.height / 2,
-        sink.width - SPACING,
-        sink.height
+      const { x, y, width, height } = sink;
+      const radius = 3;
+      const reducedHeight = height * 0.9;
+      const color = this.getColor(i);
+
+      // Draw the background with rounded corners
+      this.context.fillStyle = color.background;
+      this.drawRoundedRect(
+        x,
+        y - reducedHeight / 2,
+        (width - SPACING) * 1.1,
+        height,
+        radius
       );
-      this.context.fillStyle = this.getColor(i).color;
+
+      // Draw the text on the sink
+      this.context.fillStyle = color.color;
+      this.context.font = "bold 16px 'Comic Sans MS'";
+      this.context.textBaseline = "middle";
       this.context.fillText(
-        sink?.multiplier?.toString() + "x",
-        sink.x - 15 + sinkWidth / 2,
-        sink.y
+        sink?.multiplier?.toString() + (i !== 0 && i !== 16 ? "x" : ""),
+        x - 15 + sinkWidth / 2,
+        y
       );
     }
+  }
+
+  // Helper function to draw rectangles with rounded corners
+  drawRoundedRect(x, y, width, height, radius) {
+    this.context.beginPath();
+    this.context.moveTo(x + radius, y);
+    this.context.lineTo(x + width - radius, y);
+    this.context.quadraticCurveTo(x + width, y, x + width, y + radius);
+    this.context.lineTo(x + width, y + height - radius);
+    this.context.quadraticCurveTo(
+      x + width,
+      y + height,
+      x + width - radius,
+      y + height
+    );
+    this.context.lineTo(x + radius, y + height);
+    this.context.quadraticCurveTo(x, y + height, x, y + height - radius);
+    this.context.lineTo(x, y + radius);
+    this.context.quadraticCurveTo(x, y, x + radius, y);
+    this.context.closePath();
+    this.context.fill();
   }
 
   draw() {
