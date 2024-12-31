@@ -1,4 +1,4 @@
-import User from "../models/user-model";
+const User = require("../models/user-model");
 // generated possible values for each rows asa starting point
 
 const outcomes = {
