@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../auth/authSlice";
+import { loginUser } from "../state-managment/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {

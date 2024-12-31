@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { signupUser } from "../auth/authSlice";
+import { signupUser } from "../state-managment/authSlice";
 
 const SignUpPage = () => {
   const [name, setName] = useState("");

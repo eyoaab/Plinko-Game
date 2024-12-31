@@ -36,6 +36,9 @@ export const loginUser = createAsyncThunk(
           },
         }
       );
+
+      const token = response.data.token;
+      localStorage.setItem("token", token);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

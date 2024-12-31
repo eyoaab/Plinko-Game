@@ -1,9 +1,9 @@
 import { Provider } from "react-redux";
-import store from "./store";
+import store from "./state-managment/store";
 import LoginPage from "./user/login-page";
 import SignUpPage from "./user/sign-up-page";
 import GamePage from "./game/game-page";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 const App = () => (
   <Provider store={store}>
