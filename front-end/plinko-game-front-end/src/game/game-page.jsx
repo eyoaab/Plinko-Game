@@ -44,11 +44,10 @@ export function Game() {
         }
       );
       if (ballManager) {
-        console.log(response.data);
-        // dispatch(updateScore(score + response.data.multiplier * bidAmount)); // Update game score
-        dispatch(updateScore(response.data.score)); // Update game score
-
         ballManager.addBall(response.data.point);
+        setTimeout(() => {
+          dispatch(updateScore(response.data.score)); // Update game score
+        }, 7000);
       }
     } catch (error) {
       console.error("Error adding ball:", error);
