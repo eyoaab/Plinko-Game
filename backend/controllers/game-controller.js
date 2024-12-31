@@ -231,6 +231,7 @@ exports.getPattern = async (req, res) => {
       point: possibleOutcomes[randomIndex],
       multiplier,
       pattern: dropPattern,
+      score: user.score,
     });
   } catch (error) {
     // Log the error and respond with an error message
