@@ -30,7 +30,19 @@ export function Game() {
   const handleAddBall = async () => {
     try {
       dispatch(updateScore(score - bidAmount)); // Update game score
-      const response = await axios.get(GAME_API_URL, { data: 1 });
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        GAME_API_URL,
+        {
+          bidAmount,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (ballManager) {
         console.log(response.data);
         dispatch(updateScore(score + response.data.multiplier * bidAmount)); // Update game score

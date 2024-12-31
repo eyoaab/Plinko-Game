@@ -1,4 +1,6 @@
+import User from "../models/user-model";
 // generated possible values for each rows asa starting point
+
 const outcomes = {
   0: [],
   1: [3964963.452981615, 3910113.3998412564],
@@ -191,6 +193,13 @@ const MULTIPLIERS = {
 // to get the random pattern
 exports.getPattern = async (req, res) => {
   try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+    const { bidAmount } = req.body;
+    if (!user) {
+      throw new Error("User not found.");
+    }
+
     let successfulDrops = 0; // Tracks the number of "R" outcomes
     const dropPattern = []; // Holds the sequence of "R" and "L"
 
@@ -215,6 +224,8 @@ exports.getPattern = async (req, res) => {
 
     const randomIndex = Math.floor(Math.random() * possibleOutcomes.length); // Pick a random index
 
+    user.score = user.score - bidAmount + multiplier * bidAmount;
+    await user.save();
     // Respond with the generated pattern, multiplier, and a random outcome
     res.status(200).json({
       point: possibleOutcomes[randomIndex],

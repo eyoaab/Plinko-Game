@@ -19,8 +19,7 @@ const LoginPage = () => {
   // Navigate to home page after successful signup
   useEffect(() => {
     if (userInfo) {
-      dispatch(updateScore(1000));
-      console.log(userInfo);
+      dispatch(updateScore(userInfo.user.score));
       navigate("/game"); // Redirect to home page
     }
   }, [userInfo, navigate, dispatch]);
