@@ -102,7 +102,7 @@ export class BallManager {
       this.context.font = "bold 16px 'Comic Sans MS'";
       this.context.textBaseline = "middle";
       this.context.fillText(
-        sink?.multiplier?.toString() + (i !== 0 && i !== 16 ? "x" : ""),
+        sink?.multiplier?.toString() + "x",
         x - 15 + sinkWidth / 2,
         y
       );

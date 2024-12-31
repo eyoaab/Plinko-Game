@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import AmountComponent from "..//user/bank-amount-component";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { updateScore } from "../state-managment/game-slice";
 
 import { BallManager } from "../game/classes/BallManager";
 
@@ -13,6 +15,8 @@ export function Game() {
   const [bidAmount, setBidAmount] = useState("");
   const [error, setError] = useState("");
   const canvasRef = useRef(null);
+  const dispatch = useDispatch();
+  const score = useSelector((state) => state.game.score);
 
   // Initialize BallManager instance when canvas is ready
   useEffect(() => {
@@ -25,9 +29,11 @@ export function Game() {
   // Handler to add a ball by fetching data from the API
   const handleAddBall = async () => {
     try {
+      dispatch(updateScore(score - bidAmount)); // Update game score
       const response = await axios.get(GAME_API_URL, { data: 1 });
       if (ballManager) {
         console.log(response.data);
+        dispatch(updateScore(score + response.data.multiplier * bidAmount)); // Update game score
         ballManager.addBall(response.data.point);
       }
     } catch (error) {

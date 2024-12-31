@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../state-managment/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { updateScore } from "../state-managment/game-slice";
 
 const LoginPage = () => {
   const [userName, setuserName] = useState("");
@@ -18,9 +19,11 @@ const LoginPage = () => {
   // Navigate to home page after successful signup
   useEffect(() => {
     if (userInfo) {
+      dispatch(updateScore(1000));
+      console.log(userInfo);
       navigate("/game"); // Redirect to home page
     }
-  }, [userInfo, navigate]);
+  }, [userInfo, navigate, dispatch]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-classBg">
