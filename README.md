@@ -3,6 +3,8 @@
 
 This repository contains the source code for a Plinko game built using the MERN (MongoDB, Express, React, Node.js) stack. The project allows users to play the Plinko game, track scores, and manage user authentication.
 
+https://github.com/user-attachments/assets/2d8fa56e-8fd2-4cb5-9704-b45aeb40d396
+
 ## Features
 
 - Interactive Plinko game board built using React
