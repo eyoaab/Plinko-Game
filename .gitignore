@@ -27,7 +27,6 @@ coverage/
 .next/
 .nuxt/
 .vuepress/dist
-public/
 .out/
 
 # Compiled binary addons
@@ -106,7 +105,6 @@ Thumbs.db
 ehthumbs.db
 
 # Hexo build output
-public/
 
 # Miscellaneous
 *.bak
