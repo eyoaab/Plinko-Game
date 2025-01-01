@@ -1,4 +1,5 @@
-# Plinko Game
+# Plinko Game 
+[Deployed Link](https://plinko-game-henna.vercel.app/)
 
 This repository contains the source code for a Plinko game built using the MERN (MongoDB, Express, React, Node.js) stack. The project allows users to play the Plinko game, track scores, and manage user authentication.
 
