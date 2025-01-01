@@ -11,7 +11,9 @@ const SignUpPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { loading, error, userInfo } = useSelector((state) => state.auth);
+  const { loading, error, userInfo, signUpinfo } = useSelector(
+    (state) => state.auth
+  );
 
   const handleSubmit = (e) => {
     if (password !== confirmPassword) {
@@ -22,10 +24,10 @@ const SignUpPage = () => {
   };
   // Navigate to home page after successful signup
   useEffect(() => {
-    if (userInfo) {
+    if (signUpinfo) {
       navigate("/"); // Redirect to home page
     }
-  }, [userInfo, navigate]);
+  }, [signUpinfo, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-classBg">

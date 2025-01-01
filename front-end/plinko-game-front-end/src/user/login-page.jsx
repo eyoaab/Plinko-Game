@@ -10,7 +10,9 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { loading, error, userInfo } = useSelector((state) => state.auth);
+  const { loading, error, userInfo, signUpinfo } = useSelector(
+    (state) => state.auth
+  );
 
   const handleSubmit = (e) => {
     e.preventDefault();
