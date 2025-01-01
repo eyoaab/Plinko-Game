@@ -23,7 +23,7 @@ const SignUpPage = () => {
   // Navigate to home page after successful signup
   useEffect(() => {
     if (userInfo) {
-      navigate("/game"); // Redirect to home page
+      navigate("/"); // Redirect to home page
     }
   }, [userInfo, navigate]);
 
