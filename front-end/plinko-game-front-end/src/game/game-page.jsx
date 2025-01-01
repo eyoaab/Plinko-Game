@@ -12,7 +12,7 @@ const GAME_API_URL = "https://plinko-game-2.onrender.com/game";
 export function Game() {
   // State and references
   const [ballManager, setBallManager] = useState(null);
-  const [bidAmount, setBidAmount] = useState("");
+  const [bidAmount, setBidAmount] = useState(0);
   const [error, setError] = useState("");
   const canvasRef = useRef(null);
   const dispatch = useDispatch();
@@ -29,6 +29,9 @@ export function Game() {
   // Handler to add a ball by fetching data from the API
   const handleAddBall = async () => {
     try {
+      if (score <= bidAmount || bidAmount <= 0) {
+        return;
+      }
       dispatch(updateScore(score - bidAmount)); // Update game score
       const token = localStorage.getItem("token");
       const response = await axios.post(

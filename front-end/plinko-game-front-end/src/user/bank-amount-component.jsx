@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function BankAmount() {
   const { loading, error, userInfo } = useSelector((state) => state.auth);
   const score = useSelector((state) => state.game.score);
+  const navigate = useNavigate();
   return (
     <div className="flex flex-row items-center  h-full bg-gray-100 rounded-sm">
       {loading && (
@@ -39,6 +41,14 @@ function BankAmount() {
             )}
           </div>
         </div>
+      )}
+      {!userInfo && (
+        <p className="p-1 text-sm text-center text-black">
+          You have To Log In First{" "}
+          <Link to="/" className="text-blue-500 hover:underline">
+            Log-in
+          </Link>
+        </p>
       )}
     </div>
   );
